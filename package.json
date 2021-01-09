@@ -1,0 +1,42 @@
+{
+  "name": "rates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miyaParker/Rates.git"
+  },
+  "author": "karen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miyaParker/Rates/issues"
+  },
+  "homepage": "https://github.com/miyaParker/Rates#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2000",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 5000
+    }
+  }
+}
