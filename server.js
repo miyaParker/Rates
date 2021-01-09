@@ -5,20 +5,20 @@ const port = process.env.PORT || 5000
 const app = express();
 const postRouter = express.Router()
 
-const fetchRates = async () => {
-    const res = await axios.get(`https://api.exchangeratesapi.io/latest`)
+const fetchRates = async (base) => {
+    const res = await axios.get(`https://api.exchangeratesapi.io/latest?base=${base}`)
     return res.data
 }
 
 postRouter.route('/rates')
     .get((request, response) => {
-        let { base, currency } = request.query
-        if ((base === undefined || currency === undefined) || (base === "" || currency === "")) {
+        let { base:baseCurrency, currency } = request.query
+        if ((baseCurrency === undefined || currency === undefined) || (baseCurrency === "" || currency === "")) {
             response.status(400)
             response.send("base and currency are required")
         }
         else {
-            fetchRates()
+            fetchRates(baseCurrency)
                 .then(data => {
                     const currencyArray = currency.split(',')
                     const filterData = (rates) => {
@@ -31,7 +31,7 @@ postRouter.route('/rates')
                     const filtered = filterData(data.rates)
                     const responseObject = {
                         results: {
-                            "base": base,
+                            "base": data.base,
                             "date": data.date,
                             "rates": filtered
                         }
